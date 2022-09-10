@@ -5,18 +5,15 @@ module.exports = {
     async execute(message: Message) {
         //* Stockage du contenu du message
         let contenu = message.content;
-        console.log(contenu);
 
         //* Définit un regex qui permet de match tous les emojis classiques
         const regex_nettoyage = /[^àùçèé\w\s]/g; // Récupère tout ce qui n'est pas des lettres (les accents sont mis en durs car sinon ils sont capturés) et des espaces
 
         //* Nettoyage de la chaîne de caractères
         contenu = contenu.replaceAll(regex_nettoyage, "");
-        console.log(contenu);
 
         //* Conversion en array en retirant tous les éléments vides et enregistre le dernier mot de la chaîne
         const contenuArr = contenu.split(" ").filter(String);
-        console.log(contenuArr);
         const mot = contenuArr[contenuArr.length - 1];
         if (mot?.length < 4) return; // Si la longueur du mot est plus petite que 4, ça ne peut pas être quoi et répéter serait inutile, on renvoie
 
