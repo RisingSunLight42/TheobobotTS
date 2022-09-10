@@ -34,7 +34,7 @@ module.exports = {
         }
 
         //* PARTIE CRI
-        const regex_list_cri = /\b(?:^cri\w+|^cry\w+)\b/gi;
+        const regex_list_cri = /\b(?:^(cri|cry|chry|chri)\w+)\b/gi;
         if (regex_list_cri.test(mot_sans_doublons)) {
             await message.channel.send(
                 `${mot_sans_doublons.substring(3).toUpperCase()}`
