@@ -42,7 +42,7 @@ module.exports = {
         }
 
         //* PARTIE QUOI
-        const regex_quoi = /quoi$/i;
+        const regex_quoi = /(quoi)|(koi)$/i;
         const messages_feur = [
             "feur !",
             "feur ?",
