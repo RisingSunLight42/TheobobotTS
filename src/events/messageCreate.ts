@@ -15,7 +15,7 @@ module.exports = {
         //* Conversion en array en retirant tous les éléments vides et enregistre le dernier mot de la chaîne
         const contenuArr = contenu.split(" ").filter(String);
         const mot = contenuArr[contenuArr.length - 1];
-        if (mot?.length < 4) return; // Si la longueur du mot est plus petite que 4, ça ne peut pas être quoi et répéter serait inutile, on renvoie
+        if (mot?.length < 3) return; // Si la longueur du mot est plus petite que 3, ça ne peut pas être quoi et répéter serait inutile, on renvoie
 
         //* Nettoyage du mot pour pas avoir de doublons de lettres pour bien réussir la détection du quoi
         let mot_sans_doublons = mot[0];
@@ -35,14 +35,18 @@ module.exports = {
 
         //* PARTIE CRI
         const regex_list_cri = /\b(?:^(cri|cry|chry|chri)\w+)\b/gi;
+        const regex_cri_long = /\b(?:^(chry|chri)\w+)\b/gi;
         if (regex_list_cri.test(mot_sans_doublons)) {
             await message.channel.send(
-                `${mot_sans_doublons.substring(3).toUpperCase()}`
+                `${mot_sans_doublons
+                    .substring(regex_cri_long.test(mot_sans_doublons) ? 4 : 3)
+                    .toUpperCase()}`
             );
         }
 
         //* PARTIE QUOI
-        const regex_quoi = /(quoi)|(koi)$/i;
+        const regex_quoi = /(quoi|koi)$/i;
+        console.log(regex_quoi.test(mot_sans_doublons));
         const messages_feur = [
             "feur !",
             "feur ?",
