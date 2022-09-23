@@ -3,6 +3,7 @@ import { Message } from "discord.js";
 module.exports = {
     name: "messageCreate",
     async execute(message: Message) {
+        if (message.author.bot) return;
         //* Stockage du contenu du message
         let contenu = message.content;
 
